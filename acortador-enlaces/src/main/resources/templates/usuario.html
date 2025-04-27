@@ -1,0 +1,200 @@
+<!--Esta vista es para ver los acortadores/imagen asociada al usuario-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Estilos básicos y scripts -->
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>Información del usuario.</title>
+</head>
+
+<body>
+    <nav class=" navbar navbar-expand-lg navbar-light bg-light ">
+        <a class="navbar-brand " href="# ">Parcial 2</a>
+        <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarSupportedContent " aria-controls="navbarSupportedContent " aria-expanded="false " aria-label="Toggle navigation ">
+        <span class="navbar-toggler-icon "></span>
+    </button>
+
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/todo" th:if="${inicio.rol == 'admin'}">Todos los Acortadores</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="/admin" class="nav-link" th:if="${inicio.rol == 'admin'}">Administrar</a>
+                </li>
+                <li>
+                    <!--inicio para poder ocultar y/o mostrar inicio de sesión-->
+                    <a href="/login " class="nav-link " th:unless="${inicio}">Iniciar sesión</a>
+                    <a href="/salir " class="nav-link " th:if="${inicio}">Salir</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content">
+
+        <div class="container-fluid">
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title" th:text="${'Información de: ' + infouser}">Información de usuario</h4>
+                            <!-- <p class="card-category"></p> -->
+                        </div>
+                        <div class="card-body">
+                            <!--Info básica del usuario-->
+                            <div class="container">
+                                <h3 style="text-align: center;">Modificar usuario</h3>
+                                <hr>
+                                <!-- Comprobar clave en caso de que se suba normalmente-->
+                                <form action="/actualizarperfil" method="POST" onsubmit="return comprobarClave();">
+                                    <div class="row">
+                                        <div class="col-md-none">
+                                            <div class="form-group">
+                                                <input th:value="${perfil.id}" id="idusuario" name="idusuario" type="hidden" class="form-control" required readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Usuario</label>
+                                                <!--No modificar el username-->
+                                                <input th:value="${perfil.usuario}" id="username" name="username" type="text" class="form-control" required readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Nombre</label>
+                                                <input th:value="${perfil.nombre}" id="nombre" name="nombre" type="text" class="form-control" minlength="3" maxlength="16" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Rol</label>
+                                                <select name="rol" id="rol" class="form-control" th:unless="${perfil.id == inicio.id}">
+                                                    <option th:value="'admin'" th:selected="${perfil.rol == 'admin'}">Administrador</option>
+                                                    <option th:value="'usuario'" th:selected="${perfil.rol == 'usuario'}">Usuario</option>
+                                                </select>
+                                                <input th:value="${perfil.rol}" id="rol" name="rol" type="text" class="form-control" readonly required th:if="${perfil.id == inicio.id}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Contraseña</label>
+                                                <input id="pass1" name="pass1" th:type="${inicio.rol == 'admin' ? 'text' : 'password'}" th:value="${inicio.rol == 'admin' ? perfil.password : ''}" placeholder="Contraseña actual" minlength="3" maxlength="16" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Nueva contraseña</label>
+                                                <input id="pass2" name="pass2" th:type="${inicio.rol == 'admin' ? 'text' : 'password'}" placeholder="Nueva contraseña" minlength="3" maxlength="16" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Confirmar</label>
+                                                <input id="pass3" name="pass3" th:type="${inicio.rol == 'admin' ? 'text' : 'password'}" placeholder="Digite nuevamente" minlength="3" maxlength="16" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input id="submit" name="submit" type="submit" value="Actualizar información" class="btn btn-secondary">
+                                    <input id="submit2" name="submit2" type="submit" formaction="/cambiarclave" value="Cambiar contraseña" class="btn btn-secondary float-right">
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                            <hr>
+                            <!--Aqui la tabla-->
+                            <div th:if="${inicio.rol == 'admin'}" class="content">
+                                <!--Acortadores registrados-->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th class="col-md-3">
+                                                Acortador
+                                            </th>
+                                            <!--Si no es admin-->
+                                            <th class="col-md-3">
+                                                Link
+                                            </th>
+                                            <th class="col-md-2">
+                                                Visitas
+                                            </th>
+                                            <th class="col-md-4">
+                                                Acción
+                                            </th>
+                                        </thead>
+                                        <tbody id="shortlinks">
+                                            <tr th:each="shortlink:${shortlinks}">
+                                                <td>
+                                                    [[${shortlink.getShortLink()}]]
+                                                </td>
+                                                <td>
+                                                    [[${shortlink.url}]]
+                                                </td>
+                                                <td>
+                                                    [[${shortlink.visitsCount}]]
+                                                </td>
+                                                <td>
+                                                    <form action="/perfileliminaracortador" method="POST">
+                                                        <!--Colocar ID de acortador-->
+                                                        <input th:value="${shortlink.id}" id="idacortador" name="idacortador" type="hidden" class="form-control" readonly required>
+                                                        <input th:value="${perfil.id}" id="idusuario" name="idusuario" type="hidden" class="form-control" readonly required>
+                                                        <a th:href="${'/resumen/' + shortlink.id + '/' + perfil.id}" class="btn btn-primary">Resumen</a>
+                                                        <input type="submit" value="Eliminar" class="btn btn-danger">
+                                                    </form>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer ">
+        <div class="container text-center ">
+            <script>
+                document.write(new Date().getFullYear())
+            </script>,
+            <a class="text-reset fw-bold " href="https://github.com/20170945/ISC-415-Parcial-2">Audric y Zhen</a>
+        </div>
+    </footer>
+    <!-- Footer -->
+
+</body>
+
+<script>
+    function comprobarClave() {
+        let clave1 = document.getElementById('pass2').value;
+        let clave2 = document.getElementById('pass3').value;
+
+        if (clave1 == clave2) {
+            return true;
+        } else
+            alert("Las dos claves son distintas. Por favor, asegúrese de que sean idénticas.");
+        return false;
+    }
+</script>
+
+</html>

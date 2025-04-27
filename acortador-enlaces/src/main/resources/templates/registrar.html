@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/logincustom.css">
+    <!-- Estilos básicos y scripts -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <title th:text="${titulo}">Registro</title>
+</head>
+
+<body>
+    <div class="sidenav">
+        <div class="login-main-text">
+            <h2>Registrar</h2>
+            <p>Ingrese sus datos aquí.</p>
+        </div>
+    </div>
+    <div class="main">
+        <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                <form method="POST" action="/registrarusuario" onsubmit="return comprobarClave();">
+                    <div class="form-group">
+                        <!--Recuerda, patron de solo letras sin espacio: -->
+                        <label>Usuario</label>
+                        <input id="usuario" name="usuario" type="text" class="form-control" placeholder="Nombre de usuario" pattern="^[a-zA-Z]*" minlength="3" maxlength="16" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" minlength="3" maxlength="16" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input id="claveA" name="claveA" type="password" class="form-control" placeholder="Clave" minlength="3" maxlength="16" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input id="claveB" name="claveB" type="password" class="form-control" placeholder="Clave" minlength="3" maxlength="16" required>
+                    </div>
+                    <button id="submit" name="submit" type="submit" class="btn btn-blue">Registrarse</button>
+                    <a href="/login" class="btn btn-secondary">Volver</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    function comprobarClave() {
+        let clave1 = document.getElementById('claveA').value;
+        let clave2 = document.getElementById('claveB').value;
+
+        if (clave1 == clave2) {
+            return true;
+        } else
+            alert("Las dos claves son distintas. Por favor, asegúrese de que sean idénticas.");
+
+        return false;
+    }
+</script>
+
+</html>

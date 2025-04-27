@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+// Version de java
+
+targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = 11
+// Grupo, version y mainclass
+group 'org.example'
+version '1.0-SNAPSHOT'
+mainClassName = 'org.example.App'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    //javalin
+    compile 'io.javalin:javalin:3.13.7'
+    //cosas necesarias de javalin?
+    compile "org.slf4j:slf4j-simple:1.7.30"
+    compile "org.slf4j:slf4j-api:1.8.0-beta4"
+    compile "org.slf4j:slf4j-simple:1.8.0-beta4"
+    //H2
+    compile 'com.h2database:h2:1.4.200'
+    //postgres
+    compile 'org.postgresql:postgresql:42.2.1'
+    //hibernate
+    implementation 'org.hibernate:hibernate-core:5.5.2.Final'
+    implementation 'org.hibernate:hibernate-entitymanager:5.5.2.Final'
+    //Google Reflections
+    implementation 'org.reflections:reflections:0.9.11'
+    //Bcrypt
+    implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
+    // https://mvnrepository.com/artifact/org.jasypt/jasypt
+    implementation group: 'org.jasypt', name: 'jasypt', version: '1.9.2'
+    //Thymeleaf template
+    compile 'org.thymeleaf:thymeleaf:3.0.5.RELEASE'
+    //para json
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3'
+    // jsoup HTML parser library @ https://jsoup.org/
+    compile 'org.jsoup:jsoup:1.13.1'
+    // validador de urls
+    compile 'commons-validator:commons-validator:1.7'
+    // user-agent analyzer
+    implementation 'nl.basjes.parse.useragent:yauaa:5.23'
+}
+
+shadowJar{
+    archiveBaseName = 'app'
+    archiveClassifier = ''
+    archiveVersion = ''
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task stage {
+    dependsOn shadowJar
+}
