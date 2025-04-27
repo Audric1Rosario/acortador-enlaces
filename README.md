@@ -39,7 +39,9 @@ Basado en el sitio para acortar enlaces [Bitly](https://bitly.com/).
 ### Servicios offline
 
 ![Advertencia de que está sin conexión](readme/offline-warning.png)
+
 ![Inicio offline](readme/offline-login.png)
+
 ![Datos guardados para ver offline](readme/offline-data.png)
 
 ### Backend en python
