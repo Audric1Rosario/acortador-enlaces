@@ -8,9 +8,9 @@
 ## Presentación
 
 [![Acortador de Enlaces, Proyecto de Programación Web
-](http://img.youtube.com/vi/ehyupnTtSqw/0.jpg)](http://www.youtube.com/watch?v=ehyupnTtSqw&ab_channel=AudricRosario "Acortador de enlaces")
+](http://img.youtube.com/vi/ehyupnTtSqw/0.jpg)](http://www.youtube.com/watch?v=ehyupnTtSqw&ab_channel=AudricRosario "Acortador de enlaces"){:target="_blank"}
 
-Basado en el sitio para acortar enlaces [Bitly](https://bitly.com/).
+Basado en el sitio para acortar enlaces [Bitly](https://bitly.com/){:target="_blank"}.
 
 ### Utiliza:
 
