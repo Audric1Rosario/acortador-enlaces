@@ -1,49 +1,48 @@
-# Acortador de enlaces - Proyecto de Programación Web - Agosto de 2021
+# Link Shortener - Web Development Project - August 2021
 
-## Elaborado por
+## Made by
 
 - Audric Rosario
 - Zheng Peng Li
 
-## Presentación
+## Presentation
 
-[![Acortador de Enlaces, Proyecto de Programación Web
-](http://img.youtube.com/vi/ehyupnTtSqw/0.jpg)](http://www.youtube.com/watch?v=ehyupnTtSqw&ab_channel=AudricRosario "Acortador de enlaces")
+[![Link Shortener, Web Development Project](http://img.youtube.com/vi/ehyupnTtSqw/0.jpg)](http://www.youtube.com/watch?v=ehyupnTtSqw&ab_channel=AudricRosario "Link Shortener")
 
-Basado en el sitio para acortar enlaces [Bitly](https://bitly.com/).
+Based on the link shortening site [Bitly](https://bitly.com/).
 
-### Utiliza:
+### Features:
 
 - Javalin
-- Base de datos ORM (H2)
-- Local Storage & IndexedDB.
+- ORM database (H2)
+- Local Storage & IndexedDB
 - Service Workers
-- Backend en Python : SOAP, REST y gRPC
+- Python backend: SOAP, REST, and gRPC
 
-### Estructura de base de datos
+### Database structure
 
-![Estructura de datos](readme/database-structure.png)
+![Data structure](readme/database-structure.png)
 
-### Página principal
+### Home Page
 
-![Página principal](readme/main-page.png)
+![Home Page](readme/main-page.png)
 
-### Inicio de sesión
+### Login
 
-![Inicio de sesión](readme/login.png)
+![Login](readme/login.png)
 
-### Luego de iniciar sesión
+### After Logging In
 
-![Página principal después de inicio de sesión](readme/online.png)
+![Home Page After Login](readme/online.png)
 
-### Servicios offline
+### Offline Services
 
-![Advertencia de que está sin conexión](readme/offline-warning.png)
+![Offline Warning](readme/offline-warning.png)
 
-![Inicio offline](readme/offline-login.png)
+![Offline Login](readme/offline-login.png)
 
-![Datos guardados para ver offline](readme/offline-data.png)
+![Saved Data for Offline Viewing](readme/offline-data.png)
 
-### Backend en python
+### Python Backend
 
-![estructura de datos](readme/backend.png)
+![Data Structure](readme/backend.png)
